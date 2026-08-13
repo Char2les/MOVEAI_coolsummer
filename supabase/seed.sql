@@ -49,3 +49,20 @@ on conflict (id) do nothing;
 insert into public.shipments (id, shipping_order_id, receipt_number, train_no, origin_station, destination_station, departure_at, arrival_at, tracking_status, current_station, created_at) values
   ('SHP-20260814-005', 'SHIPPING-ORDER-001', '20260813-0004821', 'KTX 005', '부산역', '서울역', '2026-08-14T09:00:00+09:00', '2026-08-14T11:42:00+09:00', 'IN_TRANSIT', '대전역', '2026-08-13T14:20:00+09:00')
 on conflict (id) do nothing;
+
+-- Demo-only AI personalization context. These rows do not represent production user data.
+insert into public.trip_context_events (session_id, event_type, occurred_at, region, entity_id, metadata) values
+  ('demo-traveler-001', 'VISITED_POI', '2026-08-27T09:30:00+09:00', '부산', null, '{"poiName":"해운대","category":"tourism"}'),
+  ('demo-traveler-001', 'VISITED_POI', '2026-08-27T10:20:00+09:00', '부산', null, '{"poiName":"감천문화마을","category":"tourism"}'),
+  ('demo-traveler-001', 'SEARCHED_PRODUCT', '2026-08-27T10:45:00+09:00', '부산', null, '{"query":"부산 부모님 선물"}'),
+  ('demo-traveler-001', 'VIEWED_MERCHANT', '2026-08-27T11:00:00+09:00', '부산', 'samjin-busan', '{}'),
+  ('demo-traveler-001', 'RETURN_TRIP_APPROACHING', '2026-08-27T11:38:00+09:00', '부산', null, '{"minutesUntilDeparture":120}')
+on conflict do nothing;
+
+insert into public.merchant_recommendation_profiles (merchant_id, summary, tags, signature_items, recommendation_contexts) values
+  ('samjin-busan', '부산역 인근에서 부산 지역 먹거리와 선물 상품을 구매할 수 있는 제휴 매장', array['부산','먹거리','선물','부모님선물','지역상점'], array['부산 어묵 종합 선물세트','삼진 어묵 선물세트','프리미엄 어묵 세트'], array['귀가 전 선물','부산 기념품','가족 선물'])
+on conflict (merchant_id) do update set
+  summary = excluded.summary,
+  tags = excluded.tags,
+  signature_items = excluded.signature_items,
+  recommendation_contexts = excluded.recommendation_contexts;

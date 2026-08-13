@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { getReachableMerchants } from "../lib/domain/reachability.ts";
 import { evaluateTravelIntent } from "../lib/domain/travel-intent.ts";
+import { buildTravelAIContext } from "../lib/ai/travel-context.ts";
+import { getRuleFallbackRecommendation } from "../lib/ai/travel-fallback.ts";
 
 const merchant = (id: string, availableNow = true) => ({ id, availableNow }) as never;
 const base = {
@@ -36,5 +38,9 @@ assert.equal(high.level, "HIGH", "tourism, purchase, and nearby return train pro
 assert.equal(high.shouldNotify, true);
 assert.equal(low.level, "LOW", "ordinary movement produces low intent");
 assert.equal(low.shouldNotify, false);
+
+const aiContext = buildTravelAIContext({ tripDurationDays: 2, currentLocation: "Busan", touristSpotVisited: true, merchantBrowsingCount: 2, purchaseDetected: true, minutesUntilReturnTrain: 120 }, [{ id: "event", sessionId: "demo", eventType: "SEARCHED_PRODUCT", occurredAt: "2026-08-27T11:00:00+09:00", region: "Busan", entityId: null, metadata: { query: "gift" } }], [{ merchantId: "reachable", reachable: true, requiredMinutes: 20, remainingMinutes: 120 }, { merchantId: "blocked", reachable: false, requiredMinutes: 200, remainingMinutes: 120 }], [merchant("reachable"), merchant("blocked")] as never, []);
+const fallback = getRuleFallbackRecommendation(aiContext, high);
+assert.deepEqual(fallback.recommendedMerchantIds, ["reachable"], "AI fallback only contains rule-approved reachable merchants");
 
 console.log("Core business logic tests passed.");
