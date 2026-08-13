@@ -1,7 +1,9 @@
 import "./globals.css";
 import "./feature-a.css";
 import "./feature-b.css";
+import "./feature-d.css";
 import { SellerDemoEntry } from "@/components/SellerDemoEntry";
+import { CartProvider } from "@/components/CartProvider";
 
 export const metadata = {
   title: "KORAIL+ | 나의 티켓",
@@ -11,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body>{children}<SellerDemoEntry /></body>
+      <body><CartProvider>{children}</CartProvider><SellerDemoEntry /></body>
     </html>
   );
 }
