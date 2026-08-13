@@ -29,7 +29,7 @@ export const merchants: Merchant[] = [
 ];
 
 export const getMerchant = (id: string) => merchants.find((merchant) => merchant.id === id) ?? merchants[0];
-export const filterMerchants = (query: string, filter: "all" | "partner" = "all") => merchants.filter((merchant) => {
+export const filterMerchants = (query: string, filter: "all" | "partner" = "all", source: readonly Merchant[] = merchants) => source.filter((merchant) => {
   const matchesQuery = !query || [merchant.name, merchant.category, merchant.representativeProduct].some((value) => value.includes(query));
   return matchesQuery && (filter === "all" || merchant.isPartner);
 });

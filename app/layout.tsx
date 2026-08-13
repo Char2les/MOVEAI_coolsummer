@@ -8,6 +8,7 @@ import "./feature-d.css";
 
 import { SellerDemoEntry } from "@/components/SellerDemoEntry";
 import { CartProvider } from "@/components/CartProvider";
+import { DataCatalogProvider } from "@/components/DataCatalogProvider";
 
 export const metadata = {
   title: "KORAIL+ | 나의 티켓",
@@ -22,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <CartProvider>{children}</CartProvider>
+        <DataCatalogProvider><CartProvider>{children}</CartProvider></DataCatalogProvider>
         <SellerDemoEntry />
       </body>
     </html>

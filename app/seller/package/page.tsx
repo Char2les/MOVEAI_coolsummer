@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { demoOrder, merchantPackageTypes, ShippingPackagePayload } from "@/lib/shipping-package";
+import { demoOrder, merchantPackageTypes as fallbackPackageTypes, MerchantPackageType, ShippingPackagePayload } from "@/lib/shipping-package";
 
 type FormState = { quantities: Record<string, number>; productCategory: string; iceBoxPackaging: boolean };
 const initialState: FormState = { quantities: { STORE_BOX_S: 0, STORE_BOX_M: 0, STORE_BOX_L: 0 }, productCategory: "", iceBoxPackaging: false };
@@ -13,7 +13,20 @@ export default function SellerPackagePage() {
   const [form, setForm] = useState<FormState>(initialState);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
+  const [packageTypes, setPackageTypes] = useState<MerchantPackageType[]>(fallbackPackageTypes);
+  const merchantPackageTypes = packageTypes;
   useEffect(() => { const saved = sessionStorage.getItem("seller-package-form"); if (saved) setForm(JSON.parse(saved) as FormState); setReady(true); }, []);
+  useEffect(() => {
+    fetch("/api/merchants/samjin-busan/package-types", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : Promise.reject())
+      .then(({ packageTypes: records }) => setPackageTypes(records.map((item: { id: string; merchantId: string; name: string; lengthCm: number; widthCm: number; heightCm: number; maxWeightKg: number }) => ({
+        ...item,
+        id: item.id as MerchantPackageType["id"],
+        label: item.id.replace("STORE_BOX_", "") as MerchantPackageType["label"],
+        displayName: item.name,
+      }))))
+      .catch(() => undefined);
+  }, []);
   useEffect(() => { if (ready) sessionStorage.setItem("seller-package-form", JSON.stringify(form)); }, [form, ready]);
   const setQuantity = (id: string, value: number) => setForm((current) => ({ ...current, quantities: { ...current.quantities, [id]: Math.max(0, Math.floor(value)) } }));
   const confirm = () => {
