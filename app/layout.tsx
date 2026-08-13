@@ -1,6 +1,7 @@
 import "./globals.css";
 import "./feature-a.css";
 import "./feature-b.css";
+import "./shipping.css";
 import { SellerDemoEntry } from "@/components/SellerDemoEntry";
 
 export const metadata = {
