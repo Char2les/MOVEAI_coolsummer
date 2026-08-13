@@ -65,7 +65,9 @@ insert into public.trip_context_events (session_id, event_type, occurred_at, reg
 on conflict do nothing;
 
 insert into public.merchant_recommendation_profiles (merchant_id, summary, tags, signature_items, recommendation_contexts) values
-  ('samjin-busan', '부산역 인근에서 부산 지역 먹거리와 선물 상품을 구매할 수 있는 제휴 매장', array['부산','먹거리','선물','부모님선물','지역상점'], array['부산 어묵 종합 선물세트','삼진 어묵 선물세트','프리미엄 어묵 세트'], array['귀가 전 선물','부산 기념품','가족 선물'])
+  ('samjin-busan', '부산역 인근에서 부산 지역 먹거리와 선물 상품을 구매할 수 있는 제휴 매장', array['부산','먹거리','선물','부모님선물','지역상점'], array['부산 어묵 종합 선물세트','삼진 어묵 선물세트','프리미엄 어묵 세트'], array['귀가 전 선물','부산 기념품','가족 선물']),
+  ('giftshop', '부산 지역 기념품과 로컬 굿즈를 둘러볼 수 있는 일반 등록 매장', array['부산','기념품','굿즈','지역상점'], array['부산 감성 굿즈 배송 가능','로컬 선물세트'], array['부산 기념품','여행 기념','가벼운 선물']),
+  ('haeundae', '부산의 맛을 담은 선물 상품을 제공하는 제휴 매장', array['부산','식품','선물','지역상점'], array['벌꿀/수제청 선물세트'], array['가족 선물','부산 기념품','귀가 전 선물'])
 on conflict (merchant_id) do update set
   summary = excluded.summary,
   tags = excluded.tags,
