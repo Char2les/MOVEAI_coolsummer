@@ -2,6 +2,8 @@ import "./globals.css";
 import "./feature-a.css";
 import "./feature-b.css";
 import "./shipping.css";
+import "./feedback-polish.css";
+import "./korail-home.css";
 import "./feature-d.css";
 
 import { SellerDemoEntry } from "@/components/SellerDemoEntry";

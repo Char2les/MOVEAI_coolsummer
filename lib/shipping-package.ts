@@ -1,7 +1,7 @@
 export type MerchantPackageType = { id: "STORE_BOX_S" | "STORE_BOX_M" | "STORE_BOX_L"; merchantId: string; label: "S" | "M" | "L"; displayName: string; lengthCm: number; widthCm: number; heightCm: number; maxWeightKg: number; };
 export type ShippingPackagePayload = { orderId: string; merchantId: string; orderItems: { productId: string; productName: string; quantity: number }[]; packages: { merchantPackageTypeId: MerchantPackageType["id"]; quantity: number }[]; productCategory: string; iceBoxPackaging: boolean; };
-export const demoMerchant = { id: "M001", name: "삼진어묵 부산역점" };
-export const demoOrder = { orderId: "ORDER-001", merchantId: demoMerchant.id, orderItems: [{ productId: "P001", productName: "부산어묵 종합세트", quantity: 2 }] };
+export const demoMerchant = { id: "M001", name: "빵부장 부산역점" };
+export const demoOrder = { orderId: "ORDER-001", merchantId: demoMerchant.id, orderItems: [{ productId: "P001", productName: "부산 명물 빵 세트", quantity: 2 }] };
 export const merchantPackageTypes: MerchantPackageType[] = [
   { id: "STORE_BOX_S", merchantId: "M001", label: "S", displayName: "택배 박스 S", lengthCm: 20, widthCm: 15, heightCm: 10, maxWeightKg: 2 },
   { id: "STORE_BOX_M", merchantId: "M001", label: "M", displayName: "택배 박스 M", lengthCm: 30, widthCm: 22, heightCm: 18, maxWeightKg: 5 },
