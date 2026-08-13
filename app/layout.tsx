@@ -8,6 +8,7 @@ import "./feature-d.css";
 
 import { SellerDemoEntry } from "@/components/SellerDemoEntry";
 import { DemoUserSelector } from "@/components/DemoUserSelector";
+import { HomeEntry } from "@/components/HomeEntry";
 import { CartProvider } from "@/components/CartProvider";
 import { DataCatalogProvider } from "@/components/DataCatalogProvider";
 
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <DataCatalogProvider><CartProvider>{children}</CartProvider></DataCatalogProvider>
+        <HomeEntry />
         <DemoUserSelector />
         <SellerDemoEntry />
       </body>
