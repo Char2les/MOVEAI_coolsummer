@@ -1,0 +1,1140 @@
+Design MD
+
+# KORAIL+ Extension Design System
+
+## 1. Purpose
+
+This project is a new service experience designed to live inside the existing **KORAIL+ mobile app**.
+
+The goal is **not** to replicate the current KORAIL+ interface pixel by pixel.
+
+Use KORAIL+ as the visual and brand foundation, while improving:
+
+* usability
+* information hierarchy
+* discoverability
+* task clarity
+* purchase flow
+* delivery flow
+
+The final experience should feel like:
+
+> **A cleaner and more user-friendly service designed by KORAIL+, not a separate shopping app.**
+
+### Priority Order
+
+When design principles conflict, use this priority:
+
+1. Usability
+2. Information clarity
+3. Internal consistency
+4. Visual continuity with KORAIL+
+5. Decorative aesthetics
+
+---
+
+# 2. Language
+
+All **user-facing UI copy must be written in Korean**.
+
+Examples:
+
+* `바로 구매`
+* `철도배송 가능`
+* `부산역에서 도보 3분`
+* `이 배송으로 계속`
+* `부산역 근처에서 선물을 찾아보세요`
+
+Do not use English UI copy unless it is an established brand or service name.
+
+Do not use lorem ipsum or meaningless placeholder text.
+
+---
+
+# 3. Overall Visual Direction
+
+The interface should feel:
+
+* bright
+* calm
+* clean
+* trustworthy
+* approachable
+* easy to scan
+* lightly travel-oriented
+
+Avoid making the service look like:
+
+* a generic e-commerce marketplace
+* a fintech app
+* a SaaS dashboard
+* a separate AI product
+* a highly decorative startup landing page
+
+Prefer a **flat, content-first mobile interface**.
+
+---
+
+# 4. Color Tokens
+
+Use the following core palette consistently.
+
+```css
+--color-primary: #1B69F1;
+
+--color-text-primary: #0F121B;
+--color-text-secondary: #6E6D72;
+
+--color-border: #8B8B8D;
+
+--color-surface: #FFFFFF;
+--color-surface-info: #F4F9FF;
+--color-surface-subtle: #F8F7FC;
+```
+
+## Primary Blue
+
+`#1B69F1`
+
+Use for:
+
+* primary CTA
+* selected tabs
+* selected chips
+* active navigation
+* important links
+* selected states
+
+Do not use primary blue for every title or piece of information.
+
+Blue should indicate **action, selection, or meaningful emphasis**.
+
+---
+
+## Information Surface
+
+`#F4F9FF`
+
+Use when a group of information has semantic meaning.
+
+Examples:
+
+* delivery information
+* selected travel conditions
+* product information summary
+* route information
+* recommendation explanation
+* contextual notices
+
+Do not use this color as random decoration.
+
+---
+
+## Subtle Surface
+
+`#F8F7FC`
+
+Use primarily as:
+
+* discovery page background
+* list page background
+* section separation
+* subtle structural grouping
+
+Use white cards or white content surfaces on top of this background when necessary.
+
+---
+
+# 5. Typography
+
+Use a modern Korean sans-serif font.
+
+Preferred stack:
+
+```css
+font-family:
+  Pretendard,
+  "Noto Sans KR",
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  sans-serif;
+```
+
+## Type Scale
+
+```text
+Page Title
+24px / 700
+
+Section Title
+20px / 700
+
+Item Title
+17px / 600
+
+Body
+16px / 400
+
+Body Emphasis
+16px / 600
+
+Supporting Text
+14px / 400
+
+Caption
+12px / 400
+
+Price
+18–20px / 700
+```
+
+### Rules
+
+* Keep typography hierarchy clear.
+* Avoid using too many font sizes on one screen.
+* Use left alignment for most information.
+* Avoid excessive center alignment.
+* Keep supporting copy short.
+* Product names, prices, and important decisions must be easy to scan.
+
+---
+
+# 6. Spacing
+
+Use a consistent 4px-based spacing system.
+
+```text
+4px
+8px
+12px
+16px
+20px
+24px
+32px
+40px
+```
+
+## Default Layout
+
+```text
+Page horizontal padding: 20px
+
+Card internal padding:
+16–20px
+
+Related content gap:
+8–12px
+
+Content group gap:
+16–24px
+
+Major section gap:
+32–40px
+```
+
+Do not introduce arbitrary spacing values unless necessary.
+
+---
+
+# 7. Corner Radius
+
+Use a restrained radius system.
+
+```text
+Small control: 8px
+
+Button / Input: 12px
+
+Card / Information Panel: 16px
+
+Large Feature Container: 20px maximum
+
+Chip / Filter: pill
+```
+
+### Rules
+
+* Do not make every element highly rounded.
+* Standard buttons should not look like pills.
+* Reserve pill shapes mainly for chips and filters.
+* Avoid deeply nested rounded containers.
+
+---
+
+# 8. Shadows and Borders
+
+## Shadows
+
+Avoid prominent drop shadows.
+
+Cards should feel integrated into the page rather than floating above it.
+
+If depth is required, use extremely subtle shadow only.
+
+Do not use strong Material-style elevation.
+
+---
+
+## Borders
+
+Prefer:
+
+1. whitespace
+2. surface color
+3. subtle divider
+4. border
+
+Use borders mainly for:
+
+* unselected chips
+* inputs
+* secondary buttons
+* interactive controls
+
+Avoid outlining every card.
+
+---
+
+# 9. Page Backgrounds
+
+Use different surfaces depending on the screen purpose.
+
+## Standard Screen
+
+Use:
+
+```text
+#FFFFFF
+```
+
+Examples:
+
+* detail pages
+* forms
+* settings
+* menu pages
+* checkout steps
+
+---
+
+## Discovery / List Screen
+
+Use:
+
+```text
+#F8F7FC
+```
+
+Examples:
+
+* product lists
+* store lists
+* discovery results
+* search results
+
+Content items may use white surfaces on top.
+
+---
+
+## Information Group
+
+Use:
+
+```text
+#F4F9FF
+```
+
+Examples:
+
+* delivery summary
+* travel conditions
+* recommendation reason
+* product specification summary
+
+---
+
+# 10. Navigation
+
+## Root Screens
+
+Do not show a back button on root-level screens.
+
+Example structure:
+
+```text
+페이지명                         Action
+```
+
+---
+
+## Sub Screens
+
+Use a back button for:
+
+* detail
+* purchase
+* delivery
+* payment
+* nested discovery pages
+
+Example:
+
+```text
+←   상품 상세                       ♡
+```
+
+Keep top app bars simple.
+
+Avoid unnecessary icons.
+
+---
+
+## Bottom Navigation
+
+Preserve the visual language of the existing KORAIL+ bottom navigation.
+
+Do not redesign the entire bottom navigation unless the service IA specifically requires it.
+
+The new service should feel integrated into KORAIL+, not like a separate application.
+
+---
+
+# 11. Primary CTA
+
+CTA means the main action the user should take on a screen.
+
+Examples:
+
+* `바로 구매`
+* `배송 신청하기`
+* `이 배송으로 계속`
+* `결제하기`
+
+## Primary Button
+
+```text
+Background: #1B69F1
+Text: White
+
+Height:
+52–56px
+
+Radius:
+12px
+
+Font:
+16px / 600+
+```
+
+### Rule
+
+Use **one visually dominant primary CTA per screen** whenever possible.
+
+Do not create several competing blue buttons.
+
+---
+
+## Secondary Action
+
+Use:
+
+* white background
+* subtle border
+* lower visual emphasis
+
+Typical structure:
+
+```text
+[ Secondary ] [       Primary CTA       ]
+```
+
+---
+
+## Text Action
+
+Use text instead of a button for low-priority actions.
+
+Examples:
+
+* `수정`
+* `전체보기`
+* `자세히 보기`
+
+---
+
+# 12. Chips and Filters
+
+Use KORAIL+-inspired pill filters for short categorical choices.
+
+Examples:
+
+```text
+전체
+먹거리
+기념품
+선물
+```
+
+or
+
+```text
+부산
+강릉
+경주
+전주
+```
+
+## Unselected
+
+* white background
+* subtle border
+* dark text
+
+## Selected
+
+* `#1B69F1`
+* white text
+
+### Rules
+
+* Keep labels short.
+* Avoid too many chips at once.
+* Do not place long sentences inside chips.
+* Use filters only when they meaningfully reduce search effort.
+
+---
+
+# 13. Cards and Containers
+
+Do not wrap every piece of content in a card.
+
+Choose containers based on information type.
+
+## Menu / Settings
+
+Prefer:
+
+```text
+Text
+Chevron
+Spacing or divider
+```
+
+Avoid card containers unless grouping is necessary.
+
+---
+
+## Product / Store List
+
+On `#F8F7FC` discovery backgrounds, white cards may be used.
+
+Recommended:
+
+```text
+Radius: 16px
+No strong shadow
+Minimal or no border
+```
+
+---
+
+## Information Panel
+
+Use `#F4F9FF` for semantically grouped information.
+
+Examples:
+
+* delivery conditions
+* route information
+* product specifications
+* recommendation explanation
+
+---
+
+## Avoid Nested Cards
+
+Do not solve every hierarchy problem with another card.
+
+Use:
+
+* typography
+* spacing
+* dividers
+* surface changes
+
+first.
+
+---
+
+# 14. Product List
+
+The list should help users make a decision quickly.
+
+Show only high-value information.
+
+Recommended hierarchy:
+
+```text
+[Image]
+
+상품명
+매장 또는 지역
+가격
+
+거리 · 철도배송 가능
+```
+
+Example:
+
+```text
+어묵 선물세트 1호
+삼진어묵 부산역점
+
+20,000원
+
+부산역 3분 · 철도배송 가능
+```
+
+## Important Information
+
+Prioritize:
+
+* product name
+* price
+* store or region
+* distance when relevant
+* railway delivery availability
+
+---
+
+## Avoid E-commerce Clutter
+
+Do not automatically add:
+
+* discount percentage
+* coupons
+* reward points
+* sales count
+* excessive ratings
+* review count
+* many tags
+* multiple CTA buttons
+* long product copy
+
+The service should not resemble a crowded marketplace.
+
+---
+
+# 15. Store List
+
+Store items should prioritize:
+
+* store image
+* store name
+* distance from station or current location
+* representative product
+* railway delivery availability
+
+Example:
+
+```text
+삼진어묵 부산역점
+
+부산역에서 도보 3분
+대표상품 · 어묵 선물세트
+
+철도배송 가능
+```
+
+Do not overload cards with secondary metadata.
+
+---
+
+# 16. Detail Page Pattern
+
+Use the following default hierarchy.
+
+```text
+Top Navigation
+
+Hero Image
+
+Product / Store Name
+
+Short Key Information
+
+Information Panel
+
+Detailed Content
+
+Price / Main Action
+
+Primary CTA
+```
+
+Example:
+
+```text
+[상품 이미지]
+
+어묵 선물세트 1호
+
+삼진어묵 부산역점
+부산역에서 도보 3분
+
+
+[Information Panel]
+
+구성
+6종
+
+보관방법
+냉장
+
+철도배송
+가능
+
+
+상품 설명
+
+
+20,000원
+
+[바로 구매]
+```
+
+Keep the first viewport focused on information needed for a decision.
+
+---
+
+# 17. Images
+
+Images are important for travel and regional products.
+
+## Product List
+
+Use consistent image ratios.
+
+Prefer:
+
+```text
+1:1
+```
+
+or a similarly consistent thumbnail ratio.
+
+---
+
+## Detail
+
+Use a large hero image.
+
+---
+
+## Rules
+
+* Keep image styling consistent.
+* Avoid heavy overlays.
+* Do not replace product photography with generic gradients.
+* Avoid unrelated stock photography.
+* Do not use decorative images that compete with core information.
+
+---
+
+# 18. Icons
+
+Use one coherent icon family.
+
+## Utility Icons
+
+Use simple monochrome outline icons for:
+
+* back
+* search
+* favorite
+* cart
+* home
+* share
+* settings
+* chevron
+
+---
+
+## Service Illustrations
+
+Small colored illustrations may be used for service categories such as:
+
+* railway delivery
+* luggage delivery
+* store discovery
+* travel convenience
+
+Do not use colored illustrations for ordinary controls.
+
+---
+
+# 19. Forms
+
+Forms should minimize cognitive load.
+
+## Rules
+
+* Always provide visible labels.
+* Do not rely on placeholder-only inputs.
+* Clearly distinguish required fields.
+* Maintain sufficient spacing.
+* Prefer radio options or simple selectors when choices are limited.
+* Avoid asking for information the system can already infer.
+* Split long processes into logical steps.
+
+Minimum touch target:
+
+```text
+44 × 44px
+```
+
+or larger.
+
+---
+
+# 20. Map and Store Discovery
+
+The map is a discovery tool, not the main product.
+
+Always provide an easy path between:
+
+* map
+* list
+* store detail
+
+A selected map marker should show only key information:
+
+* store name
+* distance
+* representative product
+* delivery availability
+
+Use the same store detail component used elsewhere.
+
+Do not create an entirely different visual system for map mode.
+
+---
+
+# 21. AI Search and Recommendation
+
+AI is **not a separate service**.
+
+AI is another way to discover the same stores and products available through normal browsing.
+
+Example user input:
+
+```text
+부산역 근처에서 부모님 선물 살 곳 찾아줘.
+3만원 이하였으면 좋겠어.
+```
+
+AI may interpret:
+
+```text
+Location: 부산역
+Purpose: 부모님 선물
+Budget: <= 30,000원
+```
+
+and return matching products or stores.
+
+## AI UI Rules
+
+* Do not copy ChatGPT's visual design.
+* Do not create a visually isolated "AI mode."
+* Use the same KORAIL+ typography and colors.
+* Keep the input area simple.
+* Suggested prompt chips may be used.
+* Reuse existing Product and Store components for recommendations.
+
+Example:
+
+```text
+부모님 선물이라면
+보관과 배송이 편한 상품을 추천해드릴게요.
+
+
+[Existing Product Card]
+
+어묵 선물세트 1호
+20,000원
+철도배송 가능
+```
+
+Do not use:
+
+* neon effects
+* AI glow
+* excessive gradients
+* futuristic visual effects
+
+AI should feel like a useful search feature inside KORAIL+.
+
+---
+
+# 22. Railway Delivery
+
+Railway delivery should feel like a natural continuation of purchase.
+
+Do not present it as a complex logistics management system.
+
+A delivery option should communicate:
+
+* service name
+* route
+* arrival expectation
+* price
+* main benefit
+
+Example:
+
+```text
+KTX특송
+
+부산역 → 서울역
+
+오늘 도착
+12,000원
+
+가장 빠름
+```
+
+---
+
+## Recommendation Labels
+
+Use short and understandable recommendation reasons.
+
+Examples:
+
+* `가장 빠름`
+* `가장 편리`
+* `가장 저렴`
+* `오늘 도착 가능`
+* `이 상품에 추천`
+
+Do not explain the recommendation algorithm in the main UI.
+
+---
+
+# 23. Information Hierarchy for Commerce
+
+For the new regional commerce experience, decision-critical information may be shown earlier than in existing KORAIL+ screens.
+
+Users should not need to enter a detail page just to know:
+
+* approximate price
+* distance from station
+* whether railway delivery is available
+
+This is an intentional usability improvement.
+
+---
+
+# 24. Loading, Empty, Error, Success
+
+## Loading
+
+Prefer:
+
+* simple loader
+* skeleton UI
+
+Avoid distracting animation.
+
+---
+
+## Empty State
+
+Do not show only:
+
+```text
+결과가 없습니다.
+```
+
+Instead provide a next action.
+
+Example:
+
+```text
+조건에 맞는 상품이 없어요.
+가격 범위를 조금 넓혀보세요.
+```
+
+---
+
+## Success
+
+After purchase or delivery registration, clearly show:
+
+1. what was completed
+2. what happens next
+3. what the user can do next
+
+Example:
+
+```text
+철도배송 접수가 완료되었어요.
+
+부산역에서 접수된 상품은
+오늘 서울역으로 이동할 예정이에요.
+
+[배송조회]
+```
+
+---
+
+# 25. Copywriting
+
+Use concise, natural Korean.
+
+Prefer service language over promotional language.
+
+## Good
+
+```text
+부산역 주변 배송 가능한 매장
+
+오늘 서울역 도착 가능
+
+구매한 상품을 철도배송으로 보내보세요.
+```
+
+## Avoid
+
+```text
+혁신적인 AI 기반 지역상생 스마트 철도물류 솔루션을 경험해보세요.
+```
+
+Do not write presentation copy inside the product UI.
+
+---
+
+## Button Copy
+
+Use explicit action verbs.
+
+### Good
+
+```text
+상품 보기
+바로 구매
+배송 신청
+이 배송으로 계속
+다시 구매
+```
+
+### Avoid
+
+```text
+확인
+진행
+선택
+NEXT
+```
+
+The user should understand the result of tapping a button before tapping it.
+
+---
+
+# 26. UX Improvement Rules
+
+KORAIL+ patterns are references, not absolute constraints.
+
+Improve the pattern when:
+
+* important information is hidden
+* the next action is unclear
+* unnecessary steps exist
+* filters are difficult to understand
+* delivery availability is discovered too late
+* the screen contains too much competing information
+
+Do not preserve an inconvenient pattern only for visual similarity.
+
+---
+
+# 27. Reuse Before Creating
+
+Before creating a new UI component:
+
+1. Identify the user's main task.
+2. Check whether a similar component already exists in this project.
+3. Reuse an existing component whenever possible.
+4. Modify it only when the new use case requires meaningful differences.
+
+New features should not create a new design language.
+
+---
+
+# 28. Do
+
+* Use generous white space.
+* Maintain clear visual hierarchy.
+* Keep layouts mobile-first.
+* Use KORAIL blue selectively.
+* Keep one clear primary action per screen.
+* Reuse shared components.
+* Make product and store imagery meaningful.
+* Surface price, location, and delivery information clearly.
+* Keep purchase and delivery flows short.
+* Use plain Korean language.
+* Optimize for quick scanning.
+
+---
+
+# 29. Don't
+
+Do not:
+
+* wrap everything in cards
+* make every button pill-shaped
+* use strong shadows
+* use excessive gradients
+* fill large areas with primary blue unnecessarily
+* create several competing primary CTAs
+* imitate a generic marketplace
+* add ratings, reviews, discounts, or badges without a reason
+* invent a new visual system for every page
+* design AI as a separate product
+* prioritize decorative aesthetics over usability
+* use random font sizes or spacing
+* use meaningless placeholder copy
+* redesign unrelated screens when adding one feature
+
+---
+
+# 30. Rules for Gemini When Generating UI
+
+When generating or modifying screens:
+
+1. Read this file before deciding visual structure.
+2. Preserve existing project components whenever possible.
+3. Follow the defined color, typography, spacing, and radius system.
+4. Keep user-facing text in Korean.
+5. Do not introduce a new design style without explicit instruction.
+6. Do not redesign unrelated screens.
+7. Do not add unnecessary features simply to make the screen look richer.
+8. Prioritize realistic mobile usability over decorative visuals.
+9. Use realistic Korean product and service copy.
+10. Keep the interface visually compatible with KORAIL+ while improving usability.
+
+If a design decision is not explicitly defined here:
+
+> Choose the simplest solution that is consistent with this system and easiest for the user to understand.
+
+---
+
+# 31. Final Design Principle
+
+> **Do not design a separate shopping or AI app inside KORAIL+.**
+
+Instead:
+
+> **Design a cleaner, more intuitive KORAIL+ experience that naturally connects regional discovery, commerce, and railway delivery.**

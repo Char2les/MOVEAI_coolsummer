@@ -1,0 +1,5 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { TicketCard } from "@/components/TicketCard";
+import { secondaryTicket } from "@/lib/demo-context";
+export default function SecondaryTicketPage() { const router = useRouter(); return <main className="ticket-detail-page"><header className="detail-header"><button onClick={() => router.back()} aria-label="뒤로 가기">‹</button><h1>승차권</h1><span>새 승차권</span><button onClick={() => router.push("/")} aria-label="닫기">×</button></header><p className="notice">등록된 승차권 정보를 확인하세요.</p><div className="ticket-page-content"><TicketCard ticket={secondaryTicket} /><section className="recommendation-card"><div className="rec-copy"><p className="eyebrow">여행 일정 안내 <span>⌖ 서울역 출발</span></p><h2>서울 출발 <em>{secondaryTicket.departureTime}</em></h2><p>열차 출발 전 승차권과 좌석 정보를<br />확인해 주세요.</p><button onClick={() => router.push("/a4")}>주변 매장 둘러보기　›</button></div></section></div><footer className="detail-footer"><span>‹ 이전</span><strong>전체 2 / 2⌃</strong><span>다음 ›</span></footer></main>; }

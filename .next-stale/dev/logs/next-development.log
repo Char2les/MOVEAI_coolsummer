@@ -1,0 +1,8 @@
+[00:00:06.304] Server  LOG     ✓ Ready in 5.4s
+[00:00:12.695] Server  LOG     ○ Compiling / ...
+[00:00:22.185] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:05.171] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:21.279] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:53.048] Server  ERROR   ⨯ SyntaxError: Unexpected end of JSON input
+[00:10:56.319] Server  LOG     ○ Compiling /_error ...
+[00:11:02.312] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
