@@ -59,6 +59,11 @@ insert into public.trip_context_events (session_id, event_type, occurred_at, reg
   ('demo-traveler-001', 'RETURN_TRIP_APPROACHING', '2026-08-27T11:38:00+09:00', '부산', null, '{"minutesUntilDeparture":120}')
 on conflict do nothing;
 
+-- Negative demo: no tourism, search, merchant-browsing, purchase, or shipping intent signals.
+insert into public.trip_context_events (session_id, event_type, occurred_at, region, entity_id, metadata) values
+  ('demo-nontraveler-001', 'SESSION_OPENED', '2026-08-27T11:38:00+09:00', null, null, '{"demo":true}')
+on conflict do nothing;
+
 insert into public.merchant_recommendation_profiles (merchant_id, summary, tags, signature_items, recommendation_contexts) values
   ('samjin-busan', '부산역 인근에서 부산 지역 먹거리와 선물 상품을 구매할 수 있는 제휴 매장', array['부산','먹거리','선물','부모님선물','지역상점'], array['부산 어묵 종합 선물세트','삼진 어묵 선물세트','프리미엄 어묵 세트'], array['귀가 전 선물','부산 기념품','가족 선물'])
 on conflict (merchant_id) do update set
